@@ -16,16 +16,16 @@ public:
 
         bool OnGossipHello(Player *player, Creature *creature)
         {
-		AddGossipItemFor(player, 10, "|TInterface\\icons\\Spell_Nature_Regenerate:40:40:-18|t Restore HP and MP", GOSSIP_SENDER_MAIN, 1);			// Restore Health and Mana
-		//AddGossipItemFor(player, 10, "|TInterface\\icons\\Achievement_BG_winAB_underXminutes:40:40:-18|t Reset Instances", GOSSIP_SENDER_MAIN, 2);	// Reset Instances
-		AddGossipItemFor(player, 10, "|TInterface\\icons\\SPELL_HOLY_BORROWEDTIME:40:40:-18|t Reset Cooldowns", GOSSIP_SENDER_MAIN, 3);				// Reset Cooldowns
-		AddGossipItemFor(player, 10, "|TInterface\\icons\\Achievement_BG_AB_defendflags:40:40:-18|t Reset Combat", GOSSIP_SENDER_MAIN, 4);			// Leave Combat
-		AddGossipItemFor(player, 10, "|TInterface\\icons\\Spell_Shadow_DeathScream:40:40:-18|t Remove Sickness", GOSSIP_SENDER_MAIN, 5);				// Remove Sickness
-		AddGossipItemFor(player, 10, "|TInterface\\icons\\INV_Hammer_24:40:40:-18|t Repair Items", GOSSIP_SENDER_MAIN, 6);							// Repair Items
-		AddGossipItemFor(player, 10, "|TInterface\\icons\\Achievement_WorldEvent_Lunar:40:40:-18|t Reset Talents", GOSSIP_SENDER_MAIN, 7);			// Reset Talents
-		AddGossipItemFor(player, 10, "|TInterface/Icons/INV_Misc_Bag_07:40:40:-18|t Bank", GOSSIP_SENDER_MAIN, 8);                                   // Open Bank
-		AddGossipItemFor(player, 10, "|TInterface/Icons/INV_Letter_11:40:40:-18|t Mail", GOSSIP_SENDER_MAIN, 9);                                     // Open Mailbox
-    AddGossipItemFor(player, 10, "|TInterface/Icons/achievement_general:40:40:-18|t Learn Dual Talents", GOSSIP_SENDER_MAIN, 10);                                     // Learn Dualspec
+		AddGossipItemFor(player, 10, "|TInterface\\icons\\Spell_Nature_Regenerate:40:40:-18|t 恢复HP和MP", GOSSIP_SENDER_MAIN, 1);			// 回复生命值和法力值
+		//AddGossipItemFor(player, 10, "|TInterface\\icons\\Achievement_BG_winAB_underXminutes:40:40:-18|t Reset Instances", GOSSIP_SENDER_MAIN, 2);	// 重置副本
+		AddGossipItemFor(player, 10, "|TInterface\\icons\\SPELL_HOLY_BORROWEDTIME:40:40:-18|t 重置技能CD", GOSSIP_SENDER_MAIN, 3);				// 重置技能CD
+		AddGossipItemFor(player, 10, "|TInterface\\icons\\Achievement_BG_AB_defendflags:40:40:-18|t 离开战斗", GOSSIP_SENDER_MAIN, 4);			// 离开战斗
+		AddGossipItemFor(player, 10, "|TInterface\\icons\\Spell_Shadow_DeathScream:40:40:-18|t 消除虚弱", GOSSIP_SENDER_MAIN, 5);				// 消除虚弱
+		AddGossipItemFor(player, 10, "|TInterface\\icons\\INV_Hammer_24:40:40:-18|t 修理装备", GOSSIP_SENDER_MAIN, 6);							// 修理装备
+		//AddGossipItemFor(player, 10, "|TInterface\\icons\\Achievement_WorldEvent_Lunar:40:40:-18|t Reset Talents", GOSSIP_SENDER_MAIN, 7);			// 重置天赋
+		AddGossipItemFor(player, 10, "|TInterface/Icons/INV_Misc_Bag_07:40:40:-18|t 银行", GOSSIP_SENDER_MAIN, 8);                                   // 打开银行
+		AddGossipItemFor(player, 10, "|TInterface/Icons/INV_Letter_11:40:40:-18|t 邮箱", GOSSIP_SENDER_MAIN, 9);                                     // 打开邮箱
+		//AddGossipItemFor(player, 10, "|TInterface/Icons/achievement_general:40:40:-18|t Learn Dual Talents", GOSSIP_SENDER_MAIN, 10);                // 学习双天赋
 
 		SendGossipMenuFor(player, 1, creature->GetGUID());
         return true;
@@ -41,14 +41,14 @@ public:
 			if (player->IsInCombat())
 			{
 				CloseGossipMenuFor(player);
-				player->GetSession()->SendNotification("You are in combat!");
+				player->GetSession()->SendNotification("你在战斗中!");
 				return false;
 				}
 				else if(player->getPowerType() == POWER_MANA)
 						player->SetPower(POWER_MANA, player->GetMaxPower(POWER_MANA));
 
 				player->SetHealth(player->GetMaxHealth());
-				player->GetSession()->SendNotification("|cffFFFF00NPC SERVICES \n |cffFFFFFFHP & MP succesfully restored!");
+				player->GetSession()->SendNotification("|cffFFFF00NPC 服务 \n |cffFFFFFFHP & MP 成功恢复!");
 				player->CastSpell(player, 31726);
 				break;
 
@@ -72,7 +72,7 @@ public:
                     }
 				}
 
-				player->GetSession()->SendNotification("|cffFFFF00NPC SERVICES \n |cffFFFFFFInstances succesfully reseted!");
+				player->GetSession()->SendNotification("|cffFFFF00NPC 服务 \n |cffFFFFFFInstances 成功重置！");
 				player->CastSpell(player, 59908);
                 return true;
 				break;*/
@@ -82,19 +82,19 @@ public:
 				if (player->IsInCombat())
 				{
 				CloseGossipMenuFor(player);
-				player->GetSession()->SendNotification("You are in combat!");
+				player->GetSession()->SendNotification("你在战斗中！");
 				return false;
 				}
 
 				player->RemoveAllSpellCooldown();
-				player->GetSession()->SendNotification("|cffFFFF00NPC SERVICES \n |cffFFFFFFCooldowns succesfully reseted!");
+				player->GetSession()->SendNotification("|cffFFFF00NPC 服务 \n |cffFFFFFF技能CD 成功重置！");
 				player->CastSpell(player, 31726);
 				break;
 
 		case 4: // Leave Combat
 				CloseGossipMenuFor(player);
 				player->CombatStop();
-				player->GetSession()->SendNotification("|cffFFFF00NPC SERVICES \n |cffFFFFFFCombat succesfully removed!");
+				player->GetSession()->SendNotification("|cffFFFF00NPC 服务 \n |cffFFFFFF已离开战斗状态！");
 				player->CastSpell(player, 31726);
 				break;
 
@@ -102,24 +102,24 @@ public:
 				CloseGossipMenuFor(player);
 				if(player->HasAura(15007))
 				player->RemoveAura(15007);
-				player->GetSession()->SendNotification("|cffFFFF00NPC SERVICES \n |cffFFFFFFSickness succesfully removed!");
+				player->GetSession()->SendNotification("|cffFFFF00NPC 服务 \n |cffFFFFFF虚弱状态已消除！");
 				player->CastSpell(player, 31726);
 				break;
 
 		case 6: // Repair Items
 				CloseGossipMenuFor(player);
 				player->DurabilityRepairAll(false, 0, false);
-				player->GetSession()->SendNotification("|cffFFFF00NPC SERVICES \n |cffFFFFFFItems repaired succesfully!");
+				player->GetSession()->SendNotification("|cffFFFF00NPC 服务 \n |cffFFFFFF装备修理成功!");
 				player->CastSpell(player, 31726);
 				break;
 
-	   case 7: // Reset Talents
+	   /*case 7: // Reset Talents
 				CloseGossipMenuFor(player);
 				player->resetTalents(true);
 				player->SendTalentsInfoData(false);
-				player->GetSession()->SendNotification("|cffFFFF00NPC SERVICES \n |cffFFFFFFTalents reseted succesfully!");
+				player->GetSession()->SendNotification("|cffFFFF00NPC 服务 \n |cffFFFFFF天赋重置成功！");
 				player->CastSpell(player, 31726);
-				break;
+				break;*/
 
 		case 8:	// BANK
 				CloseGossipMenuFor(player);
@@ -131,12 +131,12 @@ public:
 				player->GetSession()->SendShowMailBox(player->GetGUID());
 				break;
 
-		case 10: // Learn Dual Talent Specialization
+		/*case 10: // Learn Dual Talent Specialization
 				CloseGossipMenuFor(player);
 				if (player->IsInCombat())
 				{
 				CloseGossipMenuFor(player);
-				player->GetSession()->SendNotification("You are in combat!");
+				player->GetSession()->SendNotification("你在战斗中！");
 				return false;
 				}
 
@@ -145,11 +145,11 @@ public:
                                 player->CastSpell(player, 63624);
                                 player->learnSpell(63645);
                                 player->UpdateSpecCount(2);
-                                player->GetSession()->SendNotification("|cffFFFF00NPC SERVICES \n |cffFFFFFFDual Talents Learned Succesfully!");
+                                player->GetSession()->SendNotification("|cffFFFF00NPC 服务 \n |cffFFFFFF成功学习双天赋!");
 				return true;
-				break;
+				break;*/
 
-             }
+            }
                 return true;
         }
 };
