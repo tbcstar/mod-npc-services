@@ -1,7 +1,7 @@
-DELETE FROM `creature_template` WHERE `entry` = 190003;
-Set @NpcName = "NPC服务",
+DELETE FROM `creature_template` WHERE `entry` = 190007;
+Set @NpcName = "玩家伴侣",
 	@NpcSubname = "时光回溯",
-	@NpcEntry = 190003,
+	@NpcEntry = 190007,
 	@NpcDisplayID = 31833,
 	@NpcLevel = 80;
 
